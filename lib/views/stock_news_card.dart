@@ -44,7 +44,7 @@ class StockNewsCard extends StatelessWidget {
             SizedBox(height: 8.0),
             ClipRRect(
               child: Image.network('${news.imageUrl}'),
-              borderRadius: AppBorders.rounded,
+              borderRadius: AppBorders.rounded20,
             ),
             SizedBox(height: 16.0),
             Text(

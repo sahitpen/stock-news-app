@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:stock_news/common/app_padding.dart';
-import 'package:stock_news/common/app_text.dart';
 import 'package:stock_news/common/app_theme.dart';
 
 class ListScaffold extends StatelessWidget {
-  final String title;
+  final Icon icon;
   final List<Widget> widgets;
   final FloatingActionButton floatingActionButton;
-  final bool isScrollable;
 
   const ListScaffold({
     Key key,
-    this.title,
+    this.icon,
     this.widgets,
     this.floatingActionButton,
-    this.isScrollable = true,
   }) : super(key: key);
 
   @override
@@ -27,20 +24,14 @@ class ListScaffold extends StatelessWidget {
         iconTheme: IconThemeData(
           color: AppTheme.theme.primaryColorDark,
         ),
-        title: Text(
-          title,
-          style: AppText.appBar,
-        ),
+        leading: icon,
       ),
       body: Padding(
-        padding: AppPadding.padding16,
-        child: isScrollable
-            ? ListView(
-                children: widgets,
-              )
-            : Column(
-                children: widgets,
-              ),
+        padding: AppPadding.padding16Horizontal,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: widgets,
+        ),
       ),
       floatingActionButton: floatingActionButton,
     );
