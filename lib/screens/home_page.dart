@@ -30,8 +30,8 @@ class HomePage extends StatelessWidget {
         StockSearchField(
           key: ValueKey('stock_search_field'),
           controller: controller,
-          onSubmitted: (String value) => newsBloc.add(
-            FetchNews(tickers: value.split(', ')),
+          onSubmitted: () => newsBloc.add(
+            FetchNews(tickers: controller.text.split(', ')),
           ),
         ),
         SizedBox(height: 8.0),

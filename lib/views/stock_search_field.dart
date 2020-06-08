@@ -29,7 +29,7 @@ class StockSearchField extends StatelessWidget {
               border: OutlineInputBorder(borderRadius: AppBorders.rounded5),
             ),
             controller: controller,
-            onSubmitted: onSubmitted,
+            onSubmitted: (String value) => onSubmitted,
           ),
         ),
         SizedBox(
@@ -46,7 +46,7 @@ class StockSearchField extends StatelessWidget {
               Icons.search,
               color: AppTheme.theme.canvasColor,
             ),
-            onPressed: null,
+            onPressed: onSubmitted,
           ),
         )
       ],
