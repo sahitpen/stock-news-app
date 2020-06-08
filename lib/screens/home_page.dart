@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
         ),
         Text(
           'Market Daily Digest.',
-          style: AppText.appBarLarge,
+          style: AppText.appBar,
         ),
         SizedBox(height: 16.0),
         StockSearchField(
