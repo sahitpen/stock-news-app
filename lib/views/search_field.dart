@@ -33,18 +33,15 @@ class SearchField extends StatelessWidget {
               hintText: 'Search for a ticker symbol',
               hintStyle: AppText.subtitle,
               contentPadding: AppPadding.padding8,
-              border: OutlineInputBorder(borderRadius: AppBorders.rounded5),
+              border: OutlineInputBorder(borderRadius: AppBorders.rounded5Left),
             ),
             onTap: onTap,
             onSubmitted: (String value) => onSubmitted.call(),
           ),
         ),
-        const SizedBox(
-          width: 5.0,
-        ),
         Container(
           decoration: BoxDecoration(
-            borderRadius: AppBorders.rounded5,
+            borderRadius: AppBorders.rounded5Right,
             color: _theme.accentColor,
           ),
           child: IconButton(
