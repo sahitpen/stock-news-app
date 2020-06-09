@@ -3,26 +3,29 @@ import 'package:stock_news/common/app_padding.dart';
 import 'package:stock_news/common/app_theme.dart';
 
 class ListScaffold extends StatelessWidget {
-  final Icon icon;
+  final Widget icon;
   final List<Widget> widgets;
-  final FloatingActionButton floatingActionButton;
+  final bool implyLeading;
+  static final _theme = AppTheme.theme;
 
   const ListScaffold({
     Key key,
     this.icon,
-    this.widgets,
-    this.floatingActionButton,
-  }) : super(key: key);
+    this.implyLeading = true,
+    @required this.widgets,
+  })  : assert(widgets != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.theme.canvasColor,
+      backgroundColor: _theme.canvasColor,
       appBar: AppBar(
+        automaticallyImplyLeading: implyLeading,
         elevation: 0,
-        backgroundColor: AppTheme.theme.canvasColor,
+        backgroundColor: _theme.canvasColor,
         iconTheme: IconThemeData(
-          color: AppTheme.theme.primaryColorDark,
+          color: _theme.primaryColorDark,
         ),
         leading: icon,
       ),
@@ -33,7 +36,6 @@ class ListScaffold extends StatelessWidget {
           children: widgets,
         ),
       ),
-      floatingActionButton: floatingActionButton,
     );
   }
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_news/bloc/news_bloc.dart';
 import 'package:stock_news/common/app_text.dart';
+import 'package:stock_news/views/animated_search_field.dart';
 import 'package:stock_news/views/list_scaffold.dart';
-import 'package:stock_news/views/stock_search_field.dart';
 import 'package:stock_news/views/stock_news_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -26,15 +26,16 @@ class HomePage extends StatelessWidget {
           'Market Daily Digest.',
           style: AppText.appBar,
         ),
-        SizedBox(height: 16.0),
-        StockSearchField(
-          key: ValueKey('stock_search_field'),
+        const SizedBox(height: 16.0),
+        AnimatedSearchField(
           controller: controller,
           onSubmitted: () => newsBloc.add(
-            FetchNews(tickers: controller.text.split(', ')),
+            FetchNews(
+              tickers: controller.text.split(', '),
+            ),
           ),
         ),
-        SizedBox(height: 8.0),
+        const SizedBox(height: 8.0),
         Expanded(
           child: BlocBuilder<NewsBloc, NewsState>(
             builder: (context, state) => _handleState(state),
