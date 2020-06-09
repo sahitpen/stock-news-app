@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_news/common/app_padding.dart';
 import 'package:stock_news/common/app_theme.dart';
+import 'package:stock_news/views/filter_list.dart';
 import 'package:stock_news/views/search_field.dart';
 
 class ExpandedSearchPage extends StatelessWidget {
@@ -18,6 +19,7 @@ class ExpandedSearchPage extends StatelessWidget {
       body: Padding(
         padding: AppPadding.paddingLeftTopRight,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SearchField(
               key: ValueKey('stock_search_field'),
@@ -34,6 +36,8 @@ class ExpandedSearchPage extends StatelessWidget {
               controller: controller,
               onSubmitted: () => _popScreen(context),
             ),
+            SizedBox(height: 16.0),
+            FilterList(),
           ],
         ),
       ),
