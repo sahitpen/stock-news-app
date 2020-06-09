@@ -4,14 +4,14 @@ import 'package:stock_news/common/app_theme.dart';
 
 class ListScaffold extends StatelessWidget {
   final Widget icon;
+  final Widget header;
   final List<Widget> widgets;
-  final bool implyLeading;
   static final _theme = AppTheme.theme;
 
   const ListScaffold({
     Key key,
     this.icon,
-    this.implyLeading = true,
+    this.header,
     @required this.widgets,
   })  : assert(widgets != null),
         super(key: key);
@@ -20,20 +20,29 @@ class ListScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _theme.canvasColor,
-      appBar: AppBar(
-        automaticallyImplyLeading: implyLeading,
-        elevation: 0,
-        backgroundColor: _theme.canvasColor,
-        iconTheme: IconThemeData(
-          color: _theme.primaryColorDark,
-        ),
-        leading: icon,
-      ),
       body: Padding(
         padding: AppPadding.padding16Horizontal,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: widgets,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                elevation: 0,
+                backgroundColor: _theme.canvasColor,
+                leading: icon,
+                iconTheme: IconThemeData(
+                  color: _theme.primaryColorDark,
+                ),
+                bottom: header,
+              ),
+            ];
+          },
+          body: Padding(
+            padding: AppPadding.paddingLeftTopRight,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: widgets,
+            ),
+          ),
         ),
       ),
     );

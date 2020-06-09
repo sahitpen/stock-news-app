@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:stock_news/views/expanded_search_field.dart';
+import 'package:stock_news/views/expanded_search_page.dart';
 import 'package:stock_news/views/search_field.dart';
 
 class AnimatedSearchField extends StatelessWidget {
@@ -20,7 +20,7 @@ class AnimatedSearchField extends StatelessWidget {
       transitionDuration: Duration(milliseconds: 500),
       tappable: false,
       openBuilder: (BuildContext context, VoidCallback action) {
-        return ExpandedSearchField(controller: controller);
+        return ExpandedSearchPage(controller: controller);
       },
       closedBuilder: (BuildContext c, VoidCallback action) {
         return SearchField(
