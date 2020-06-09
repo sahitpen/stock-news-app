@@ -27,6 +27,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 4.0),
         Expanded(
           child: BlocBuilder<NewsBloc, NewsState>(
             builder: (context, state) => _handleState(state),
