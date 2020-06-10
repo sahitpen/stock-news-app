@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-enum Sentiment { Positive, Neutral, Negative }
-
 class News extends Equatable {
   final String newsUrl;
   final String imageUrl;
@@ -9,7 +7,6 @@ class News extends Equatable {
   final String text;
   final String source;
   final String date;
-  final Sentiment sentiment;
   final List tickers;
 
   const News({
@@ -19,7 +16,6 @@ class News extends Equatable {
     this.text,
     this.source,
     this.date,
-    this.sentiment,
     this.tickers,
   });
 
@@ -31,7 +27,6 @@ class News extends Equatable {
         text,
         source,
         date,
-        sentiment,
         tickers,
       ];
 
@@ -43,24 +38,7 @@ class News extends Equatable {
       text: json['text'],
       source: json['source_name'],
       date: json['date'],
-      sentiment: _mapStringToSentiment(json['sentiment']),
       tickers: json['tickers'],
     );
-  }
-
-  static Sentiment _mapStringToSentiment(String input) {
-    Sentiment sentiment;
-    switch (input) {
-      case 'Positive':
-        sentiment = Sentiment.Positive;
-        break;
-      case 'Negative':
-        sentiment = Sentiment.Negative;
-        break;
-      case 'Neutral':
-        sentiment = Sentiment.Neutral;
-        break;
-    }
-    return sentiment;
   }
 }
