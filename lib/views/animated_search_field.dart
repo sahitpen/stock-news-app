@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:stock_news/views/expanded_search_page.dart';
+import 'package:stock_news/screens/expanded_search_page.dart';
 import 'package:stock_news/views/search_field.dart';
 
 class AnimatedSearchField extends StatelessWidget {

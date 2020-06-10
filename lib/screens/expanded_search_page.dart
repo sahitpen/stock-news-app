@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stock_news/common/app_padding.dart';
 import 'package:stock_news/common/app_theme.dart';
-import 'package:stock_news/views/filter_list.dart';
+import 'package:stock_news/models/filters.dart';
+import 'package:stock_news/views/filter_display.dart';
 import 'package:stock_news/views/search_field.dart';
 
 class ExpandedSearchPage extends StatelessWidget {
@@ -37,7 +38,7 @@ class ExpandedSearchPage extends StatelessWidget {
               onSubmitted: () => _popScreen(context),
             ),
             SizedBox(height: 16.0),
-            FilterList(),
+            FilterDisplay.createColumn(Filters.filterMap)
           ],
         ),
       ),
