@@ -20,7 +20,7 @@ class AnimatedSearchField extends StatelessWidget {
       transitionDuration: Duration(milliseconds: 500),
       tappable: false,
       openBuilder: (BuildContext context, VoidCallback action) {
-        return ExpandedSearchPage(controller: controller);
+        return ExpandedSearchPage(textEditingController: controller);
       },
       closedBuilder: (BuildContext c, VoidCallback action) {
         return SearchField(

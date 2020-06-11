@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stock_news/common/app_padding.dart';
 import 'package:stock_news/common/app_theme.dart';
 import 'package:stock_news/models/filters.dart';
@@ -6,12 +7,12 @@ import 'package:stock_news/views/filter_display.dart';
 import 'package:stock_news/views/search_field.dart';
 
 class ExpandedSearchPage extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController textEditingController;
 
   const ExpandedSearchPage({
     Key key,
-    @required this.controller,
-  })  : assert(controller != null),
+    @required this.textEditingController,
+  })  : assert(textEditingController != null),
         super(key: key);
 
   @override
@@ -30,15 +31,15 @@ class ExpandedSearchPage extends StatelessWidget {
                   color: AppTheme.theme.highlightColor,
                 ),
                 onTap: () {
-                  controller.clear();
+                  textEditingController.clear();
                   _popScreen(context);
                 },
               ),
-              controller: controller,
+              controller: textEditingController,
               onSubmitted: () => _popScreen(context),
             ),
             SizedBox(height: 16.0),
-            FilterDisplay.createColumn(Filters.filterMap)
+            FilterDisplay.createColumn(Filters.filterMap),
           ],
         ),
       ),
@@ -46,6 +47,14 @@ class ExpandedSearchPage extends StatelessWidget {
   }
 
   void _popScreen(BuildContext context) {
+    //_saveFilters();
     Navigator.pop(context);
+  }
+
+  void _saveFilters(Map<String, dynamic> filterOptions) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('news_type', filterOptions['news_type']);
+    await prefs.setString('sentiment', filterOptions['sentiment']);
+    await prefs.setInt('num_items', filterOptions['num_items']);
   }
 }
