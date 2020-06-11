@@ -22,6 +22,7 @@ class AnimatedSearchField extends StatelessWidget {
       openBuilder: (BuildContext context, VoidCallback action) {
         return ExpandedSearchPage(textEditingController: controller);
       },
+      onClosed: (data) => print(data),
       closedBuilder: (BuildContext c, VoidCallback action) {
         return SearchField(
           key: ValueKey('stock_search_field'),
