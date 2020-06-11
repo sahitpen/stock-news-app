@@ -51,10 +51,20 @@ class ExpandedSearchPage extends StatelessWidget {
     Navigator.pop(context);
   }
 
+  // TO-DO: move Shared Preferences logic to separate class
   void _saveFilters(Map<String, dynamic> filterOptions) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('news_type', filterOptions['news_type']);
     await prefs.setString('sentiment', filterOptions['sentiment']);
     await prefs.setInt('num_items', filterOptions['num_items']);
+  }
+
+  Future<Map<String, dynamic>> _getFilters() async {
+    final filterOptions = <String, dynamic>{};
+    final prefs = await SharedPreferences.getInstance();
+    filterOptions['news_type'] = await prefs.getString('news_type');
+    filterOptions['sentiment'] = await prefs.getString('sentiment');
+    filterOptions['num_items'] = await prefs.getInt('num_items') ?? 50;
+    return filterOptions;
   }
 }
