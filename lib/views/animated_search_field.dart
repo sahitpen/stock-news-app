@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:stock_news/common/shared_preferences.dart';
 import 'package:stock_news/screens/expanded_search_page.dart';
 import 'package:stock_news/views/search_field.dart';
 
@@ -20,9 +21,15 @@ class AnimatedSearchField extends StatelessWidget {
       transitionDuration: Duration(milliseconds: 500),
       tappable: false,
       openBuilder: (BuildContext context, VoidCallback action) {
-        return ExpandedSearchPage(textEditingController: controller);
+        return FutureBuilder(
+            future: _getFilterState(),
+            builder: (_, AsyncSnapshot<Map<String, dynamic>> snapshot) {
+              return ExpandedSearchPage(
+                textEditingController: controller,
+                filterStateMap: snapshot.data,
+              );
+            });
       },
-      onClosed: (data) => print(data),
       closedBuilder: (BuildContext c, VoidCallback action) {
         return SearchField(
           key: ValueKey('stock_search_field'),
@@ -32,5 +39,10 @@ class AnimatedSearchField extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<Map<String, dynamic>> _getFilterState() async {
+    final _filterStateMap = await getFilters();
+    return _filterStateMap;
   }
 }
