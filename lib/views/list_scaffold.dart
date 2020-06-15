@@ -19,15 +19,14 @@ class ListScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _theme.canvasColor,
       body: Padding(
         padding: AppPadding.padding16Horizontal,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
+                backgroundColor: AppTheme.theme.canvasColor,
                 elevation: 0,
-                backgroundColor: _theme.canvasColor,
                 leading: icon,
                 iconTheme: IconThemeData(
                   color: _theme.primaryColorDark,

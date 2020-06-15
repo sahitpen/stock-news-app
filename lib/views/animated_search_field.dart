@@ -21,18 +21,10 @@ class AnimatedSearchField extends StatelessWidget {
       transitionDuration: Duration(milliseconds: 500),
       tappable: false,
       openBuilder: (BuildContext context, VoidCallback action) {
-        return FutureBuilder(
-            future: _getFilterState(),
-            builder: (_, AsyncSnapshot<Map<String, dynamic>> snapshot) {
-              var data = <String, dynamic>{};
-              if (snapshot.connectionState == ConnectionState.done) {
-                data = snapshot.data;
-              }
-              return ExpandedSearchPage(
-                textEditingController: controller,
-                filterStateMap: data,
-              );
-            });
+        return ExpandedSearchPage(
+          textEditingController: controller,
+          filterStateMap: getFilters(),
+        );
       },
       closedBuilder: (BuildContext c, VoidCallback action) {
         return SearchField(
@@ -43,10 +35,5 @@ class AnimatedSearchField extends StatelessWidget {
         );
       },
     );
-  }
-
-  Future<Map<String, dynamic>> _getFilterState() async {
-    final _filterStateMap = await getFilters();
-    return _filterStateMap;
   }
 }

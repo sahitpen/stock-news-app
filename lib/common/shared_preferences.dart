@@ -17,7 +17,7 @@ void saveFilters(Map<String, dynamic> filterStateMap) async {
       'num_results', filterStateMap['num_results']);
 }
 
-Future<Map<String, dynamic>> getFilters() async {
+Map<String, dynamic> getFilters() {
   final filterOptions = <String, dynamic>{};
   for (var label in FilterLabels.boolLabelsExpanded) {
     label = label.toLowerCase();
