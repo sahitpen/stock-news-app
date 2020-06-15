@@ -72,7 +72,8 @@ class ExpandedSearchPage extends StatelessWidget {
         stateMap: filterStateMap,
       );
     }
-    _filterWidgetMap['Number of Results'] = SliderFilter();
+    _filterWidgetMap['Number of Results'] =
+        SliderFilter(stateMap: filterStateMap);
     return _filterWidgetMap;
   }
 }
