@@ -21,8 +21,9 @@ Map<String, dynamic> getFilters() {
   final filterOptions = <String, dynamic>{};
   for (var label in FilterLabels.boolLabelsExpanded) {
     label = label.toLowerCase();
-    filterOptions[label] = sharedPreferences.getBool(label);
+    filterOptions[label] = sharedPreferences.getBool(label) ?? false;
   }
-  filterOptions['num_results'] = sharedPreferences.getDouble('num_results');
+  filterOptions['num_results'] =
+      sharedPreferences.getDouble('num_results') ?? 0.0;
   return filterOptions;
 }

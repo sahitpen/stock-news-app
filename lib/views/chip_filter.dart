@@ -20,7 +20,7 @@ class ChipFilter extends StatelessWidget {
     return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
       return FilterChip(
-        selected: stateMap[_lowercaseLabel] ?? false,
+        selected: stateMap[_lowercaseLabel],
         onSelected: (bool value) {
           setState(() => stateMap[_lowercaseLabel] = value);
         },

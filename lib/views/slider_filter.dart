@@ -15,7 +15,7 @@ class SliderFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
-        final sliderValue = stateMap['num_results'] ?? 0.0;
+        final sliderValue = stateMap['num_results'];
         return Slider(
           value: sliderValue,
           onChanged: (newValue) =>
