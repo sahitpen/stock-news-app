@@ -19,7 +19,7 @@ class StockApiClient {
   }
 
   void addFilterParameters(Map<String, dynamic> filters) {
-    queryParameters.addAll(filters);
+    queryParameters.addAll(_convertFiltersToQueries(filters));
   }
 
   Future<List<News>> fetchNews(List<String> tickers) async {
@@ -37,5 +37,38 @@ class StockApiClient {
     return newsList.map((newsObj) {
       return News.fromJson(newsObj);
     }).toList();
+  }
+
+  Map<String, dynamic> _convertFiltersToQueries(Map<String, dynamic> filters) {
+    final _queries = <String, dynamic>{};
+    // Convert news type checkboxes to queries
+    _queries['type'] = _elementsToQuery(['video', 'article'], filters);
+    // Convert sentiment checkboxes to queries
+    _queries['sentiment'] =
+        _elementsToQuery(['positive', 'negative', 'neutral'], filters);
+    // Convert slider to query
+    _queries['items'] = filters['num_results'].toInt();
+    return _queries;
+  }
+
+  String _elementsToQuery(List<String> items, Map<String, dynamic> filters) {
+    final _queries = [];
+    for (final item in items) {
+      if (filters[item]) {
+        _queries.add(item);
+      }
+    }
+    if (_queries.isEmpty) {
+      _queries.addAll(items);
+    }
+    return _shortenList(_queries);
+  }
+
+  String _shortenList(List list) {
+    return list
+        .toString()
+        .replaceAll('[', '')
+        .replaceAll(']', '')
+        .replaceAll(' ', '');
   }
 }

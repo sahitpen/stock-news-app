@@ -25,7 +25,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       yield NewsLoading();
       try {
         await apiClient.authenticate();
-        apiClient.addFilterParameters(event.filterQueries);
+        apiClient.addFilterParameters(event.filters);
         final news = await apiClient.fetchNews(event.tickers);
         if (news.isEmpty) {
           yield NewsEmpty();
