@@ -6,6 +6,7 @@ SharedPreferences sharedPreferences;
 
 Future<Null> initSharedPreferences() async {
   sharedPreferences = await SharedPreferences.getInstance();
+  await sharedPreferences.clear();
 }
 
 void saveFilters(Map<String, dynamic> filterStateMap) async {
@@ -21,9 +22,9 @@ Map<String, dynamic> getFilters() {
   final filterOptions = <String, dynamic>{};
   for (var label in FilterLabels.boolLabelsExpanded) {
     label = label.toLowerCase();
-    filterOptions[label] = sharedPreferences.getBool(label) ?? false;
+    filterOptions[label] = sharedPreferences.getBool(label) ?? true;
   }
   filterOptions['num_results'] =
-      sharedPreferences.getDouble('num_results') ?? 0.0;
+      sharedPreferences.getDouble('num_results') ?? 10.0;
   return filterOptions;
 }

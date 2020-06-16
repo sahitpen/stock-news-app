@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_news/bloc/news_bloc.dart';
+import 'package:stock_news/common/shared_preferences.dart';
 import 'package:stock_news/views/animated_search_field.dart';
 import 'package:stock_news/views/header_titles.dart';
 import 'package:stock_news/views/list_scaffold.dart';
@@ -24,6 +25,7 @@ class HomePage extends StatelessWidget {
           onSubmitted: () => newsBloc.add(
             FetchNews(
               tickers: controller.text.split(', '),
+              filters: getFilters(),
             ),
           ),
         ),

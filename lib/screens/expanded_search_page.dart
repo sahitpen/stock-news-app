@@ -65,7 +65,7 @@ class ExpandedSearchPage extends StatelessWidget {
   }
 
   Map<String, Widget> _getFilterWidgets() {
-    Map<String, Widget> _filterWidgetMap = {};
+    final _filterWidgetMap = <String, Widget>{};
     for (final label in FilterLabels.boolLabels.keys) {
       _filterWidgetMap[label] = ChipFilter.createRow(
         labels: FilterLabels.boolLabels[label],

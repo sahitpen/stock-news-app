@@ -20,9 +20,9 @@ class SliderFilter extends StatelessWidget {
           value: sliderValue,
           onChanged: (newValue) =>
               setState(() => stateMap['num_results'] = newValue),
-          divisions: 5,
+          divisions: 9,
           label: '${sliderValue}',
-          min: 0,
+          min: 5,
           max: 50,
           inactiveColor: _theme.accentColor,
           activeColor: _theme.primaryColor,
