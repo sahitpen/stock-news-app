@@ -32,6 +32,7 @@ class ExpandedSearchPage extends StatelessWidget {
           children: <Widget>[
             SearchField(
               key: ValueKey('stock_search_field'),
+              isGraphButtonVisible: false,
               prefixIcon: InkWell(
                 child: Icon(
                   Icons.arrow_back,

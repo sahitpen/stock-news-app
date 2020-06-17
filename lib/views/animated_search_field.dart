@@ -34,6 +34,7 @@ class AnimatedSearchField extends StatelessWidget {
           onTap: () => action(),
         );
       },
+      closedElevation: 0.0,
     );
   }
 }
