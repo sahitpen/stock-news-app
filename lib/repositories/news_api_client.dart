@@ -2,19 +2,20 @@ import 'package:dio/dio.dart';
 import 'package:stock_news/authorization/secret_loader.dart';
 import 'package:stock_news/models/news.dart';
 import 'package:meta/meta.dart';
+import 'package:stock_news/repositories/api_client.dart';
 
-class StockApiClient {
-  static const baseUrl = 'https://stocknewsapi.com/api/v1';
-  final Map<String, dynamic> queryParameters = {};
-  final Dio httpClient;
+class NewsApiClient extends ApiClient {
+  NewsApiClient({
+    @required Dio httpClient,
+  })  : assert(httpClient != null),
+        super(
+          baseUrl: 'https://stocknewsapi.com/api/v1',
+          httpClient: httpClient,
+        );
 
-  StockApiClient({
-    @required this.httpClient,
-  }) : assert(httpClient != null);
-
+  @override
   Future<bool> authenticate() async {
-    final apiKey = await SecretLoader.getStocksApiKey();
-    queryParameters['token'] = apiKey;
+    queryParameters['token'] = await SecretLoader.getApiKey('news_api_key');
     return true;
   }
 

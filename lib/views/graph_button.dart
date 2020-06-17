@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stock_news/common/app_text.dart';
 import 'package:stock_news/common/app_theme.dart';
+import 'package:stock_news/screens/graph_page.dart';
 
 class GraphButton extends StatelessWidget {
   final bool visible;
@@ -19,7 +20,7 @@ class GraphButton extends StatelessWidget {
       child: Visibility(
         visible: visible ?? controller.text != '',
         child: InkWell(
-          onTap: () {},
+          onTap: () => _openGraphPage(context),
           child: Row(
             children: <Widget>[
               Text(
@@ -34,6 +35,15 @@ class GraphButton extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void _openGraphPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => LineChartSample(),
       ),
     );
   }

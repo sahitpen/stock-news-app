@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class SecretLoader {
-  static Future<String> getStocksApiKey() {
+  static Future<String> getApiKey(String apiTag) {
     return rootBundle.loadStructuredData('secrets.json', (keyJson) async {
-      return jsonDecode(keyJson)['stocks_api_key'];
+      return jsonDecode(keyJson)[apiTag];
     });
   }
 }

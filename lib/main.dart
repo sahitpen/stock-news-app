@@ -2,10 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_news/common/shared_preferences.dart';
+import 'package:stock_news/repositories/news_api_client.dart';
 
 import 'bloc/news_bloc.dart';
 import 'common/app_theme.dart';
-import 'repositories/stock_api_client.dart';
+import 'repositories/news_api_client.dart';
 import 'screens/home_page.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class StockNewsApp extends StatelessWidget {
       theme: AppTheme.theme,
       home: BlocProvider(
         create: (context) => NewsBloc(
-          apiClient: StockApiClient(
+          apiClient: NewsApiClient(
             httpClient: Dio(),
           ),
         ),
