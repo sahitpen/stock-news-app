@@ -1,6 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stock_news/bloc/pricing_bloc.dart';
 import 'package:stock_news/common/app_text.dart';
 import 'package:stock_news/common/app_theme.dart';
+import 'package:stock_news/repositories/pricing_api_client.dart';
 import 'package:stock_news/screens/graph_page.dart';
 
 class GraphButton extends StatelessWidget {
@@ -43,7 +47,14 @@ class GraphButton extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (BuildContext context) => LineChartSample(),
+        builder: (BuildContext context) => BlocProvider(
+          create: (context) => PricingBloc(
+            apiClient: PricingApiClient(
+              httpClient: Dio(),
+            ),
+          ),
+          child: GraphPage(),
+        ),
       ),
     );
   }

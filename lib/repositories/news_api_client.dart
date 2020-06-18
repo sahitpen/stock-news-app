@@ -25,17 +25,17 @@ class NewsApiClient extends ApiClient {
 
   Future<List<News>> fetchNews(List<String> tickers) async {
     queryParameters['tickers'] = tickers.toString();
-    final newsResponse = await httpClient.get(
+    final _newsResponse = await httpClient.get(
       baseUrl,
       queryParameters: queryParameters,
     );
 
-    if (newsResponse.statusCode != 200) {
+    if (_newsResponse.statusCode != 200) {
       throw Exception('Error getting stock news!');
     }
 
-    final newsList = newsResponse.data['data'] as List;
-    return newsList.map((newsObj) {
+    final _newsList = _newsResponse.data['data'] as List;
+    return _newsList.map((newsObj) {
       return News.fromJson(newsObj);
     }).toList();
   }
