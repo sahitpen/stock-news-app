@@ -61,6 +61,7 @@ class SearchField extends StatelessWidget {
             ),
           ],
         ),
+        SizedBox(height: 4.0),
         GraphButton(
           visible: isGraphButtonVisible,
           controller: controller,
