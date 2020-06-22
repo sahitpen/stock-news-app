@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:stock_news/authorization/secret_loader.dart';
+import 'package:stock_news/common/status_code.dart';
 import 'package:stock_news/models/price.dart';
 import 'package:stock_news/repositories/api_client.dart';
 
@@ -27,7 +28,7 @@ class PricingApiClient extends ApiClient {
       baseUrl,
       queryParameters: queryParameters,
     );
-    if (_priceResponse.statusCode != 200) {
+    if (toStatusCode(_priceResponse.statusCode) != StatusCode.OK) {
       throw Exception('Error getting price news!');
     }
     final _priceMap =

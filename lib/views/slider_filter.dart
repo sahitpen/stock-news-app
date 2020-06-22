@@ -2,24 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:stock_news/common/app_theme.dart';
 
 class SliderFilter extends StatelessWidget {
-  static final _theme = AppTheme.theme;
-  final Map<String, dynamic> stateMap;
+  final Map<String, dynamic> _stateMap;
 
   const SliderFilter({
     Key key,
-    @required this.stateMap,
+    @required Map<String, dynamic> stateMap,
   })  : assert(stateMap != null),
+        _stateMap = stateMap,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _theme = AppTheme.theme;
     return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
-        final sliderValue = stateMap['num_results'];
+      builder: (BuildContext context, StateSetter _setState) {
+        final sliderValue = _stateMap['num_results'];
         return Slider(
           value: sliderValue,
           onChanged: (newValue) =>
-              setState(() => stateMap['num_results'] = newValue),
+              _setState(() => _stateMap['num_results'] = newValue),
           divisions: 9,
           label: '${sliderValue}',
           min: 5,

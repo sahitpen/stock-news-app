@@ -1,5 +1,5 @@
 class FilterLabels {
-  static final boolLabels = {
+  static const boolLabels = {
     'News Type': ['Video', 'Article'],
     'Sentiment': ['Positive', 'Negative', 'Neutral'],
   };

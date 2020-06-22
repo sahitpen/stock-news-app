@@ -2,8 +2,12 @@ part of 'pricing_bloc.dart';
 
 abstract class PricingState extends Equatable {
   const PricingState();
+
   @override
   List<Object> get props => [];
+
+  @override
+  bool get stringify => true;
 }
 
 class PricesEmpty extends PricingState {}

@@ -2,6 +2,9 @@ part of 'pricing_bloc.dart';
 
 abstract class PricingEvent extends Equatable {
   const PricingEvent();
+
+  @override
+  bool get stringify => true;
 }
 
 class FetchPrices extends PricingEvent {

@@ -8,6 +8,7 @@ import 'package:stock_news/views/filter_display.dart';
 import 'package:stock_news/views/search_field.dart';
 import 'package:stock_news/views/slider_filter.dart';
 
+// can use bloc for filters (event is tapping on chip, states are properties for filters)
 class ExpandedSearchPage extends StatelessWidget {
   final TextEditingController textEditingController;
   final Map<String, dynamic> filterStateMap;

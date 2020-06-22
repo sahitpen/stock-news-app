@@ -15,6 +15,9 @@ class Price extends Equatable {
         price,
       ];
 
+  @override
+  bool get stringify => true;
+
   static Price fromJson(String dateKey, dynamic json) {
     return Price(
       date: dateKey,

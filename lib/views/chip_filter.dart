@@ -18,11 +18,11 @@ class ChipFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     final _lowercaseLabel = label.toLowerCase();
     return StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
+        builder: (BuildContext context, StateSetter _setState) {
       return FilterChip(
         selected: stateMap[_lowercaseLabel],
         onSelected: (bool value) {
-          setState(() => stateMap[_lowercaseLabel] = value);
+          _setState(() => stateMap[_lowercaseLabel] = value);
         },
         label: Text(label),
       );

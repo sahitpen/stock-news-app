@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:stock_news/authorization/secret_loader.dart';
+import 'package:stock_news/common/status_code.dart';
 import 'package:stock_news/models/news.dart';
+import 'package:stock_news/common/extensions.dart';
 import 'package:meta/meta.dart';
 import 'package:stock_news/repositories/api_client.dart';
 
@@ -30,7 +32,7 @@ class NewsApiClient extends ApiClient {
       queryParameters: queryParameters,
     );
 
-    if (_newsResponse.statusCode != 200) {
+    if (toStatusCode(_newsResponse.statusCode) != StatusCode.OK) {
       throw Exception('Error getting stock news!');
     }
 
@@ -62,14 +64,6 @@ class NewsApiClient extends ApiClient {
     if (_queries.isEmpty) {
       _queries.addAll(items);
     }
-    return _shortenList(_queries);
-  }
-
-  String _shortenList(List list) {
-    return list
-        .toString()
-        .replaceAll('[', '')
-        .replaceAll(']', '')
-        .replaceAll(' ', '');
+    return _queries.shorten;
   }
 }

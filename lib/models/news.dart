@@ -30,6 +30,9 @@ class News extends Equatable {
         tickers,
       ];
 
+  @override
+  bool get stringify => true;
+
   static News fromJson(dynamic json) {
     return News(
       newsUrl: json['news_url'],

@@ -11,7 +11,6 @@ class SearchField extends StatelessWidget {
   final Function onTap;
   final Widget prefixIcon;
   final bool isGraphButtonVisible;
-  static final _theme = AppTheme.theme;
 
   const SearchField({
     ValueKey key,
@@ -25,6 +24,7 @@ class SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme = AppTheme.theme;
     return Column(
       children: <Widget>[
         Row(

@@ -6,7 +6,6 @@ class ListScaffold extends StatelessWidget {
   final Widget icon;
   final Widget header;
   final List<Widget> widgets;
-  static final _theme = AppTheme.theme;
 
   const ListScaffold({
     Key key,
@@ -18,6 +17,7 @@ class ListScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme = AppTheme.theme;
     return Scaffold(
       body: Padding(
         padding: AppPadding.padding16Horizontal,
