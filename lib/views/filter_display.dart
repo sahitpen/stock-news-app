@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:stock_news/common/app_text.dart';
+import 'package:stock_news/common/common.dart';
 
 class FilterDisplay extends StatelessWidget {
-  final String title;
-  final Widget filter;
+  final String _title;
+  final Widget _filter;
 
   const FilterDisplay({
     Key key,
-    @required this.title,
-    @required this.filter,
+    @required String title,
+    @required Widget filter,
   })  : assert(
           title != null,
           filter != null,
         ),
+        _title = title,
+        _filter = filter,
         super(key: key);
 
   @override
@@ -21,10 +23,10 @@ class FilterDisplay extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          title,
+          _title,
           style: AppText.subtitle,
         ),
-        filter,
+        _filter,
       ],
     );
   }

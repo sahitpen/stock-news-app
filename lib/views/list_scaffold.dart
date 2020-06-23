@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:stock_news/common/app_padding.dart';
-import 'package:stock_news/common/app_theme.dart';
+import 'package:stock_news/common/common.dart';
 
 class ListScaffold extends StatelessWidget {
-  final Widget icon;
-  final Widget header;
-  final List<Widget> widgets;
+  final Widget _icon;
+  final Widget _header;
+  final List<Widget> _widgets;
 
   const ListScaffold({
     Key key,
-    this.icon,
-    this.header,
-    @required this.widgets,
+    Widget icon,
+    Widget header,
+    @required List<Widget> widgets,
   })  : assert(widgets != null),
+        _icon = icon,
+        _header = header,
+        _widgets = widgets,
         super(key: key);
 
   @override
@@ -27,11 +29,11 @@ class ListScaffold extends StatelessWidget {
               SliverAppBar(
                 backgroundColor: AppTheme.theme.canvasColor,
                 elevation: 0,
-                leading: icon,
+                leading: _icon,
                 iconTheme: IconThemeData(
                   color: _theme.primaryColorDark,
                 ),
-                bottom: header,
+                bottom: _header,
               ),
             ];
           },
@@ -39,7 +41,7 @@ class ListScaffold extends StatelessWidget {
             padding: AppPadding.paddingLeftTopRight,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: widgets,
+              children: _widgets,
             ),
           ),
         ),

@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:stock_news/models/price.dart';
-import 'package:stock_news/repositories/pricing_api_client.dart';
+import 'package:stock_news/models/models.dart';
+import 'package:stock_news/repositories/repositories.dart';
 
 part 'pricing_event.dart';
 part 'pricing_state.dart';
@@ -24,16 +24,14 @@ class PricingBloc extends Bloc<PricingEvent, PricingState> {
     if (event is FetchPrices) {
       yield PricesLoading();
       try {
-        await apiClient.authenticate();
-        final prices = await apiClient.fetchPrices(event.ticker);
-        print(prices);
+        final pricingRepo = PricingRepository(priceApiClient: apiClient);
+        final prices = await pricingRepo.getPrices(event.ticker);
         if (prices.isEmpty) {
           yield PricesEmpty();
         } else {
           yield PricesLoaded(prices: prices);
         }
-      } catch (error) {
-        print(error);
+      } catch (_) {
         yield PricesError();
       }
     }

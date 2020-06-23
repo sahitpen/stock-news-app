@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
 
 class ChipFilter extends StatelessWidget {
-  final String label;
-  final Map<String, dynamic> stateMap;
+  final String _label;
+  final Map<String, dynamic> _stateMap;
 
   const ChipFilter({
     Key key,
-    @required this.label,
-    @required this.stateMap,
+    @required String label,
+    @required Map<String, dynamic> stateMap,
   })  : assert(
           label != null,
           stateMap != null,
         ),
+        _label = label,
+        _stateMap = stateMap,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _lowercaseLabel = label.toLowerCase();
+    final _lowercaseLabel = _label.toLowerCase();
     return StatefulBuilder(
         builder: (BuildContext context, StateSetter _setState) {
       return FilterChip(
-        selected: stateMap[_lowercaseLabel],
+        selected: _stateMap[_lowercaseLabel],
         onSelected: (bool value) {
-          _setState(() => stateMap[_lowercaseLabel] = value);
+          _setState(() => _stateMap[_lowercaseLabel] = value);
         },
-        label: Text(label),
+        label: Text(_label),
       );
     });
   }

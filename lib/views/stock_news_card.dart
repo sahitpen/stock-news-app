@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:stock_news/common/app_borders.dart';
-import 'package:stock_news/common/app_padding.dart';
-import 'package:stock_news/common/app_text.dart';
-import 'package:stock_news/models/news.dart';
+import 'package:stock_news/common/common.dart';
+import 'package:stock_news/models/models.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class StockNewsCard extends StatelessWidget {
-  final News news;
+  final News _news;
 
   const StockNewsCard({
     Key key,
-    @required this.news,
+    @required News news,
   })  : assert(news != null),
+        _news = news,
         super(key: key);
 
   @override
@@ -19,7 +18,7 @@ class StockNewsCard extends StatelessWidget {
     return Padding(
       padding: AppPadding.padding16Top,
       child: InkWell(
-        onTap: () => _openArticle(news.newsUrl),
+        onTap: () => _openArticle(_news.newsUrl),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -27,28 +26,28 @@ class StockNewsCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  '${news.source}',
+                  '${_news.source}',
                   style: AppText.subtitleDark,
                 ),
                 Text(
-                  _simplifyDateString(news.date),
+                  _news.date.simplifiedDate,
                   style: AppText.subtitle,
                 ),
               ],
             ),
             const SizedBox(height: 8.0),
             Text(
-              '${news.title}',
+              '${_news.title}',
               style: AppText.header,
             ),
             const SizedBox(height: 8.0),
             ClipRRect(
-              child: Image.network('${news.imageUrl}'),
+              child: Image.network('${_news.imageUrl}'),
               borderRadius: AppBorders.rounded20,
             ),
             const SizedBox(height: 16.0),
             Text(
-              news.tickers.join(', '),
+              _news.tickers.join(', '),
               style: AppText.subtitleAccent,
             ),
             const Divider(height: 30),
@@ -56,14 +55,6 @@ class StockNewsCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _simplifyDateString(String date) {
-    final components = date.split(' ');
-    if (components.length < 3) {
-      return date;
-    }
-    return components.sublist(0, 3).join(' ');
   }
 
   void _openArticle(String url) async {

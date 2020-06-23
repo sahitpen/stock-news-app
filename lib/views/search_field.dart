@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stock_news/common/app_borders.dart';
-import 'package:stock_news/common/app_padding.dart';
-import 'package:stock_news/common/app_text.dart';
-import 'package:stock_news/common/app_theme.dart';
+import 'package:stock_news/common/common.dart';
 import 'package:stock_news/views/graph_button.dart';
 
 class SearchField extends StatelessWidget {
@@ -61,7 +58,7 @@ class SearchField extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 4.0),
+        const SizedBox(height: 4.0),
         GraphButton(
           visible: isGraphButtonVisible,
           controller: controller,

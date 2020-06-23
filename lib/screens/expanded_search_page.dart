@@ -1,61 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:stock_news/common/app_padding.dart';
-import 'package:stock_news/common/app_theme.dart';
-import 'package:stock_news/common/filter_labels.dart';
-import 'package:stock_news/common/shared_preferences.dart';
+import 'package:stock_news/common/common.dart';
 import 'package:stock_news/views/chip_filter.dart';
 import 'package:stock_news/views/filter_display.dart';
 import 'package:stock_news/views/search_field.dart';
 import 'package:stock_news/views/slider_filter.dart';
 
-// can use bloc for filters (event is tapping on chip, states are properties for filters)
 class ExpandedSearchPage extends StatelessWidget {
-  final TextEditingController textEditingController;
-  final Map<String, dynamic> filterStateMap;
+  final TextEditingController _textEditingController;
+  final Map<String, dynamic> _filterStateMap;
 
   const ExpandedSearchPage({
     Key key,
-    @required this.textEditingController,
-    @required this.filterStateMap,
+    @required TextEditingController textEditingController,
+    @required Map<String, dynamic> filterStateMap,
   })  : assert(
           textEditingController != null,
           filterStateMap != null,
         ),
+        _textEditingController = textEditingController,
+        _filterStateMap = filterStateMap,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: AppPadding.paddingLeftTopRight,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SearchField(
-              key: ValueKey('stock_search_field'),
-              isGraphButtonVisible: false,
-              prefixIcon: InkWell(
-                child: Icon(
-                  Icons.arrow_back,
-                  color: AppTheme.theme.highlightColor,
+      body: SafeArea(
+        child: Padding(
+          padding: AppPadding.paddingLeftTopRight,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SearchField(
+                key: const ValueKey('stock_search_field'),
+                isGraphButtonVisible: false,
+                prefixIcon: InkWell(
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: AppTheme.theme.highlightColor,
+                  ),
+                  onTap: () {
+                    _textEditingController.clear();
+                    _popScreen(
+                      context,
+                      data: _filterStateMap,
+                    );
+                  },
                 ),
-                onTap: () {
-                  textEditingController.clear();
-                  _popScreen(
-                    context,
-                    data: filterStateMap,
-                  );
-                },
+                controller: _textEditingController,
+                onSubmitted: () => _popScreen(
+                  context,
+                  data: _filterStateMap,
+                ),
               ),
-              controller: textEditingController,
-              onSubmitted: () => _popScreen(
-                context,
-                data: filterStateMap,
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            FilterDisplay.createColumn(_getFilterWidgets()),
-          ],
+              const SizedBox(height: 16.0),
+              FilterDisplay.createColumn(_getFilterWidgets()),
+            ],
+          ),
         ),
       ),
     );
@@ -71,11 +71,11 @@ class ExpandedSearchPage extends StatelessWidget {
     for (final label in FilterLabels.boolLabels.keys) {
       _filterWidgetMap[label] = ChipFilter.createRow(
         labels: FilterLabels.boolLabels[label],
-        stateMap: filterStateMap,
+        stateMap: _filterStateMap,
       );
     }
     _filterWidgetMap['Number of Results'] =
-        SliderFilter(stateMap: filterStateMap);
+        SliderFilter(stateMap: _filterStateMap);
     return _filterWidgetMap;
   }
 }

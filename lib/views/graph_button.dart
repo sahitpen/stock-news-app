@@ -2,33 +2,35 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_news/bloc/pricing_bloc.dart';
-import 'package:stock_news/common/app_text.dart';
-import 'package:stock_news/common/app_theme.dart';
-import 'package:stock_news/repositories/pricing_api_client.dart';
+import 'package:stock_news/common/common.dart';
+import 'package:stock_news/repositories/repositories.dart';
 import 'package:stock_news/screens/graph_page.dart';
 
 class GraphButton extends StatelessWidget {
-  final bool visible;
-  final TextEditingController controller;
+  final bool _visible;
+  final TextEditingController _controller;
 
   const GraphButton({
     Key key,
-    @required this.visible,
-    @required this.controller,
-  }) : super(key: key);
+    bool visible,
+    @required TextEditingController controller,
+  })  : assert(controller != null),
+        _visible = visible,
+        _controller = controller,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 15,
       child: Visibility(
-        visible: visible ?? controller.text != '',
+        visible: _visible ?? _controller.text != '',
         child: InkWell(
           onTap: () => _openGraphPage(context),
           child: Row(
             children: <Widget>[
               Text(
-                controller.text,
+                _controller.text,
                 style: AppText.subtitle,
               ),
               Icon(

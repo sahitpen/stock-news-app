@@ -6,3 +6,13 @@ extension ListExtensions on List {
         .replaceAll(' ', '');
   }
 }
+
+extension StringExtension on String {
+  String get simplifiedDate {
+    final components = split(' ');
+    if (components.length < 3) {
+      return this;
+    }
+    return components.sublist(0, 3).join(' ');
+  }
+}

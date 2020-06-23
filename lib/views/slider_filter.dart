@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stock_news/common/app_theme.dart';
+import 'package:stock_news/common/common.dart';
 
 class SliderFilter extends StatelessWidget {
   final Map<String, dynamic> _stateMap;

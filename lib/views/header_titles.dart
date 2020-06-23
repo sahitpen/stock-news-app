@@ -6,7 +6,7 @@ class HeaderTitles extends PreferredSize {
     Key key,
   }) : super(
           key: key,
-          preferredSize: Size.fromHeight(70.0),
+          preferredSize: const Size.fromHeight(70.0),
           child: _makeHeaders(),
         );
 

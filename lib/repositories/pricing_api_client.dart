@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:stock_news/authorization/secret_loader.dart';
-import 'package:stock_news/common/status_code.dart';
-import 'package:stock_news/models/price.dart';
-import 'package:stock_news/repositories/api_client.dart';
+import 'package:stock_news/common/common.dart';
+import 'package:stock_news/models/models.dart';
+import 'package:stock_news/repositories/repositories.dart';
 
 class PricingApiClient extends ApiClient {
   PricingApiClient({
