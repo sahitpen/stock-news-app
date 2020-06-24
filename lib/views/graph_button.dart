@@ -55,7 +55,7 @@ class GraphButton extends StatelessWidget {
               httpClient: Dio(),
             ),
           ),
-          child: GraphPage(),
+          child: GraphPage(ticker: _controller.text),
         ),
       ),
     );
