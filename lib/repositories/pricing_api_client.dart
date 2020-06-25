@@ -11,7 +11,7 @@ class PricingApiClient extends ApiClient {
   })  : assert(httpClient != null),
         super(
           baseUrl:
-              'https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY',
+              'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&outputsize=full',
           httpClient: httpClient,
         );
 
@@ -32,7 +32,7 @@ class PricingApiClient extends ApiClient {
       throw Exception('Error getting price news!');
     }
     final _priceMap =
-        _priceResponse.data['Weekly Time Series'] as Map<String, dynamic>;
+        _priceResponse.data['Time Series (Daily)'] as Map<String, dynamic>;
     final _priceList = _priceMap.keys
         .map((String date) => Price.fromJson(date, _priceMap[date]))
         .toList();

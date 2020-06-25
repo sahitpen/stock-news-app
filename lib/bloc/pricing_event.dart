@@ -4,6 +4,9 @@ abstract class PricingEvent extends Equatable {
   const PricingEvent();
 
   @override
+  List<Object> get props => [];
+
+  @override
   bool get stringify => true;
 }
 

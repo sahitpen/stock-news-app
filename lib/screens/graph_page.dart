@@ -8,12 +8,8 @@ import 'package:stock_news/views/list_scaffold.dart';
 
 class GraphPage extends StatelessWidget {
   final String _ticker;
-  final List<Color> _gradientColors = [
-    const Color(0xff23b6e6),
-    const Color(0xff02d39a),
-  ];
 
-  GraphPage({
+  const GraphPage({
     Key key,
     @required String ticker,
   })  : assert(ticker != null),
@@ -22,8 +18,9 @@ class GraphPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pricingBloc = BlocProvider.of<PricingBloc>(context);
-    pricingBloc.add(FetchPrices(ticker: _ticker));
+    final _isSelected = [true, false, false];
+    final _pricingBloc = BlocProvider.of<PricingBloc>(context);
+    _pricingBloc.add(FetchPrices(ticker: _ticker));
     return Container(
       color: AppTheme.theme.canvasColor,
       child: SafeArea(
@@ -33,17 +30,51 @@ class GraphPage extends StatelessWidget {
               _ticker,
               style: AppText.appBar,
             ),
-            preferredSize: const Size.fromHeight(10),
+            preferredSize: const Size.fromHeight(20),
           ),
           widgets: <Widget>[
-            BlocBuilder<PricingBloc, PricingState>(
-              builder: (context, state) {
-                if (state is PricesLoaded) {
-                  print(state.prices);
-                  return LineChart(chartData(state.prices));
-                } else {
-                  return const CircularProgressIndicator();
-                }
+            StatefulBuilder(
+              builder: (BuildContext context, _setState) {
+                return Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      ToggleButtons(
+                        children: const <Widget>[
+                          Text('Year'),
+                          Text('Month'),
+                          Text('Week'),
+                        ],
+                        onPressed: (int index) {
+                          _setState(() {
+                            for (var buttonIndex = 0;
+                                buttonIndex < _isSelected.length;
+                                buttonIndex++) {
+                              _isSelected[buttonIndex] = buttonIndex == index;
+                            }
+                          });
+                        },
+                        isSelected: _isSelected,
+                      ),
+                      const SizedBox(height: 32.0),
+                      BlocBuilder<PricingBloc, PricingState>(
+                        builder: (context, state) {
+                          final _endDay = _getEndDay(_isSelected);
+                          if (state is PricesLoaded) {
+                            return LineChart(_chartData(
+                              state.prices,
+                              _endDay,
+                            ));
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                );
               },
             ),
           ],
@@ -52,9 +83,20 @@ class GraphPage extends StatelessWidget {
     );
   }
 
-  LineChartData chartData(List<Price> prices) {
+  int _getEndDay(List<bool> _toggleList) {
+    if (_toggleList[0]) {
+      return 365;
+    } else if (_toggleList[1]) {
+      return 30;
+    } else if (_toggleList[2]) {
+      return 7;
+    }
+    return null;
+  }
+
+  LineChartData _chartData(List<Price> prices, int _endDay) {
     final _priceEntries =
-        prices.sublist(0, 52).reversed.toList().asMap().entries;
+        prices.sublist(0, _endDay).reversed.toList().asMap().entries;
     return LineChartData(
       borderData: FlBorderData(
         show: false,
@@ -75,8 +117,8 @@ class GraphPage extends StatelessWidget {
           );
         },
       ),
-      minX: 1,
-      maxX: 52,
+      minX: 0,
+      maxX: _endDay * 1.0 - 1,
       minY: 0,
       lineBarsData: [
         LineChartBarData(
@@ -84,14 +126,15 @@ class GraphPage extends StatelessWidget {
               .map((price) => FlSpot(price.key.toDouble(), price.value.price))
               .toList(),
           isCurved: false,
-          colors: _gradientColors,
+          colors: AppTheme.chartGradients,
           barWidth: 3,
           isStrokeCapRound: false,
           dotData: FlDotData(show: false),
           belowBarData: BarAreaData(
             show: true,
-            colors:
-                _gradientColors.map((color) => color.withOpacity(0.3)).toList(),
+            colors: AppTheme.chartGradients
+                .map((color) => color.withOpacity(0.3))
+                .toList(),
           ),
         ),
       ],
