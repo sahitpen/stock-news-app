@@ -14,7 +14,7 @@ import 'screens/home_page.dart';
 // single param assertions -- see if multiple asserts work
 // XX remove print statements or put them in debug mode if statements
 // XX override stringify in bloc equatable classes
-// XX find pedantic rule for constantws
+// XX find pedantic rule for constants
 // add constructor in app padding that takes in int factor that multiplies by default val
 // XX create wrapper resource class that makes the bloc more dumb
 // XX keep packages in pubspec in alphabetical order

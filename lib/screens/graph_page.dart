@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stock_news/bloc/pricing_bloc.dart';
 import 'package:stock_news/common/common.dart';
-import 'package:stock_news/models/models.dart';
+import 'package:stock_news/views/line_chart_data.dart';
 import 'package:stock_news/views/list_scaffold.dart';
 
 class GraphPage extends StatelessWidget {
@@ -61,7 +61,7 @@ class GraphPage extends StatelessWidget {
                         builder: (context, state) {
                           final _endDay = _getEndDay(_isSelected);
                           if (state is PricesLoaded) {
-                            return LineChart(_chartData(
+                            return LineChart(chartData(
                               state.prices,
                               _endDay,
                             ));
@@ -92,52 +92,5 @@ class GraphPage extends StatelessWidget {
       return 7;
     }
     return null;
-  }
-
-  LineChartData _chartData(List<Price> prices, int _endDay) {
-    final _priceEntries =
-        prices.sublist(0, _endDay).reversed.toList().asMap().entries;
-    return LineChartData(
-      borderData: FlBorderData(
-        show: false,
-      ),
-      gridData: FlGridData(
-        show: true,
-        drawHorizontalLine: false,
-        getDrawingVerticalLine: (value) {
-          return FlLine(
-            color: const Color(0xff37434d),
-            strokeWidth: 1,
-          );
-        },
-        getDrawingHorizontalLine: (value) {
-          return FlLine(
-            color: const Color(0xff37434d),
-            strokeWidth: 1,
-          );
-        },
-      ),
-      minX: 0,
-      maxX: _endDay * 1.0 - 1,
-      minY: 0,
-      lineBarsData: [
-        LineChartBarData(
-          spots: _priceEntries
-              .map((price) => FlSpot(price.key.toDouble(), price.value.price))
-              .toList(),
-          isCurved: false,
-          colors: AppTheme.chartGradients,
-          barWidth: 3,
-          isStrokeCapRound: false,
-          dotData: FlDotData(show: false),
-          belowBarData: BarAreaData(
-            show: true,
-            colors: AppTheme.chartGradients
-                .map((color) => color.withOpacity(0.3))
-                .toList(),
-          ),
-        ),
-      ],
-    );
   }
 }
