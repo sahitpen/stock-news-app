@@ -16,7 +16,7 @@ class StockNewsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: AppPadding.padding16Top,
+      padding: AppPadding.paddingTop(factor: 2),
       child: InkWell(
         onTap: () => _openArticle(_news.newsUrl),
         child: Column(

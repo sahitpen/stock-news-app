@@ -34,7 +34,7 @@ class SearchField extends StatelessWidget {
                   prefixIcon: prefixIcon,
                   hintText: 'Search for a ticker symbol',
                   hintStyle: AppText.subtitle,
-                  contentPadding: AppPadding.padding8,
+                  contentPadding: AppPadding.padding(),
                   border:
                       OutlineInputBorder(borderRadius: AppBorders.rounded5Left),
                 ),
@@ -48,7 +48,7 @@ class SearchField extends StatelessWidget {
                 color: _theme.accentColor,
               ),
               child: IconButton(
-                padding: AppPadding.padding8,
+                padding: AppPadding.padding(),
                 icon: Icon(
                   Icons.search,
                   color: _theme.canvasColor,

@@ -24,7 +24,7 @@ class ExpandedSearchPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: AppPadding.paddingLeftTopRight,
+          padding: AppPadding.paddingLeftTopRight(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

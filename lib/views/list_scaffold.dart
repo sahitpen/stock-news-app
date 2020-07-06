@@ -22,7 +22,7 @@ class ListScaffold extends StatelessWidget {
     final _theme = AppTheme.theme;
     return Scaffold(
       body: Padding(
-        padding: AppPadding.padding16Horizontal,
+        padding: AppPadding.paddingHorizontal(factor: 2),
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
@@ -38,7 +38,7 @@ class ListScaffold extends StatelessWidget {
             ];
           },
           body: Padding(
-            padding: AppPadding.paddingLeftTopRight,
+            padding: AppPadding.paddingLeftTopRight(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: _widgets,
