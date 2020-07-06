@@ -14,10 +14,8 @@ class FetchNews extends NewsEvent {
   const FetchNews({
     @required this.tickers,
     @required this.filters,
-  }) : assert(
-          tickers != null,
-          filters != null,
-        );
+  })  : assert(tickers != null),
+        assert(filters != null);
 
   @override
   List<Object> get props => [

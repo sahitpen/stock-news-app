@@ -9,10 +9,8 @@ abstract class ApiClient {
   ApiClient({
     @required this.baseUrl,
     @required this.httpClient,
-  }) : assert(
-          baseUrl != null,
-          httpClient != null,
-        );
+  })  : assert(baseUrl != null),
+        assert(httpClient != null);
 
   Future<bool> authenticate();
 }

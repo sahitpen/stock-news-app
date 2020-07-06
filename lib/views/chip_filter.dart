@@ -8,10 +8,8 @@ class ChipFilter extends StatelessWidget {
     Key key,
     @required String label,
     @required Map<String, dynamic> stateMap,
-  })  : assert(
-          label != null,
-          stateMap != null,
-        ),
+  })  : assert(label != null),
+        assert(stateMap != null),
         _label = label,
         _stateMap = stateMap,
         super(key: key);

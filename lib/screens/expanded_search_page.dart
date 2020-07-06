@@ -13,10 +13,8 @@ class ExpandedSearchPage extends StatelessWidget {
     Key key,
     @required TextEditingController textEditingController,
     @required Map<String, dynamic> filterStateMap,
-  })  : assert(
-          textEditingController != null,
-          filterStateMap != null,
-        ),
+  })  : assert(textEditingController != null),
+        assert(filterStateMap != null),
         _textEditingController = textEditingController,
         _filterStateMap = filterStateMap,
         super(key: key);

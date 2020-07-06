@@ -4,7 +4,6 @@ import 'package:stock_news/common/common.dart';
 import 'package:stock_news/models/models.dart';
 
 LineChartData chartData(List<Price> prices, int _endDay) {
-  print(prices);
   final _priceEntries =
       prices.sublist(0, _endDay).reversed.toList().asMap().entries;
   return LineChartData(

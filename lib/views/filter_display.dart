@@ -9,10 +9,8 @@ class FilterDisplay extends StatelessWidget {
     Key key,
     @required String title,
     @required Widget filter,
-  })  : assert(
-          title != null,
-          filter != null,
-        ),
+  })  : assert(title != null),
+        assert(filter != null),
         _title = title,
         _filter = filter,
         super(key: key);
